@@ -1,0 +1,20 @@
+// ADD this block inside your EXISTING rules (inside "match /databases/{database}/documents { ... }").
+// Do not replace the rules that other parts of this Firebase project already use.
+//
+// Everyone can read the reveal. Only the parent accounts listed here can change it.
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /babySyed/{docId} {
+      allow read: if true;
+      allow write: if request.auth != null
+        && request.auth.token.email in [
+          'REPLACE_WITH_PARENT_1_EMAIL',
+          'REPLACE_WITH_PARENT_2_EMAIL'
+        ];
+    }
+
+  }
+}
